@@ -6,15 +6,17 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 console.log('===== КОМПИЛЯЦИЯ NESTJS В ОДИН ФАЙЛ ======');
 
+// Название выходного файла
 const outputFileName = "app-name.js"
+
+// Директория в которую крмпилируется файл
+// Можно задать абсолютный путь /opt/app
 const outputPath = path.resolve(__dirname, 'app');
 
 module.exports = function (options) {
 
-  // Название выходного файла
-  options.output.filename = outputFileName;
 
-  //  Директория в которую крмпилируется файл
+  options.output.filename = outputFileName;
   options.output.path = outputPath;
 
   // 
@@ -28,8 +30,9 @@ module.exports = function (options) {
     // Подключить все плагины webpack NestJS
     ...options.plugins,
 
-    // Плагин для очистки
-    new CleanWebpackPlugin(),
+    // Плагин для очистки выходной директории перед компиляцией
+    // Если нужно можно включить
+    // new CleanWebpackPlugin(),
 
     // Здесь необходимо выключить модули которые не устанолены, иначи вебпак будет генерировать ошибку,
     // вроде в зпм используются все модули, так что попробуй все закоментить
